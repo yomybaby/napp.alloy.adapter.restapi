@@ -111,7 +111,8 @@ function Sync(method, model, opts) {
 
 	// Send our own custom headers
 	if (model.config.hasOwnProperty("headers")) {
-		for (var header in model.config.headers) {
+    var headers = _.isFunction(model.config.headers) ? model.config.headers() : model.config.headers;
+		for (var header in headers) {
 			params.headers[header] = model.config.headers[header];
 		}
 	}
