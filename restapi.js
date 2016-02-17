@@ -402,9 +402,10 @@ function traverseProperties(object, string) {
 }
 
 function encodeData(obj, url) {
-	var str = [];
+	var str = [], value;
 	for (var p in obj) {
-		str.push(Ti.Network.encodeURIComponent(p) + "=" + Ti.Network.encodeURIComponent(obj[p]));
+		value = _.isObject(obj[p])?JSON.stringify(obj[p]):obj[p];
+		str.push(Ti.Network.encodeURIComponent(p) + "=" + Ti.Network.encodeURIComponent(value));
 	}
 
 	if (_.indexOf(url, "?") == -1) {
